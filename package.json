@@ -3,6 +3,11 @@
   "main": "./lib/main",
   "version": "0.1.0",
   "description": "Auto-indent ocaml",
+  "keywords": [
+    "ocaml",
+    "indent",
+    "ocp-indent"
+  ],
   "activationHooks": [
     "language-ocaml:grammar-used"
   ],

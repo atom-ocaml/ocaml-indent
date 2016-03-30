@@ -1,0 +1,5 @@
+'.source.ocaml':
+  'editor':
+    'autoIndent': false,
+    'tabType': 'soft',
+    'tabLength': 2,

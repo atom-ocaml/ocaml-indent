@@ -1,0 +1,5 @@
+'.platform-linux atom-text-editor[data-grammar="source ocaml"]':
+  'ctrl-alt-i': 'ocaml-indent:selection'
+
+'.platform-darwin atom-text-editor[data-grammar="source ocaml"]':
+  'cmd-alt-i': 'ocaml-indent:selection'

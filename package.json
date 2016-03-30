@@ -1,0 +1,20 @@
+{
+  "name": "ocaml-indent",
+  "main": "./lib/main",
+  "version": "0.0.0",
+  "description": "Auto-indent ocaml",
+  "activationHooks": [
+    "language-ocaml:grammar-used"
+  ],
+  "repository": "https://github.com/314eter/atom-ocaml-indent",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "configSchema": {
+    "ocp-indentPath": {
+      "type": "string",
+      "default": "ocp-indent"
+    }
+  }
+}

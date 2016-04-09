@@ -24,7 +24,6 @@ module.exports =
             @indentNewline editor, range
           prefix = editor.getTextInBufferRange [[range.end.row, 0], range.end]
           if prefix.match /(else|then|do|and|end|done|\)|\}|\])$/
-            console.log prefix
             @indentRange editor, range
         @subscriptions.add didInsertTextDisposable
 

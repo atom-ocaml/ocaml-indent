@@ -8,7 +8,7 @@ module.exports =
 
     target = 'atom-text-editor[data-grammar="source ocaml"]'
     @subscriptions.add atom.commands.add target,
-      'ocaml-indent:selection': => @indentSelection(),
+      'ocaml-indent:selection': => @indentSelection()
       'ocaml-indent:file': => @indentFile()
 
     @subscriptions.add atom.workspace.observeTextEditors (editor) =>
@@ -20,11 +20,16 @@ module.exports =
           didInsertTextDisposable = null
         return unless grammar.scopeName == 'source.ocaml'
         didInsertTextDisposable = editor.onDidInsertText ({text, range}) =>
-          return unless text == '\n'
-          @indentNewline editor, range
+          if text.endsWith '\n'
+            @indentNewline editor, range
+          prefix = editor.getTextInBufferRange [[range.end.row, 0], range.end]
+          if prefix.match /(else|then|do|and|end|done|\)|\}|\])$/
+            console.log prefix
+            @indentRange editor, range
         @subscriptions.add didInsertTextDisposable
 
   indentRange: (editor, {start, end}, text) ->
+    text ?= editor.getText()
     @ocpIndent ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"], text
     .then (output) =>
       indents = (parseInt s for s in output.trim().split '\n')
@@ -39,11 +44,11 @@ module.exports =
   indentSelection: ->
     return unless editor = atom.workspace.getActiveTextEditor()
     for range in editor.getSelectedBufferRanges()
-      @indentRange editor, range, editor.getText()
+      @indentRange editor, range
 
   indentFile: ->
     return unless editor = atom.workspace.getActiveTextEditor()
-    @indentRange editor, editor.getBuffer().getRange(), editor.getText()
+    @indentRange editor, editor.getBuffer().getRange()
 
   ocpIndent: (args, text) ->
     new Promise (resolve, reject) ->

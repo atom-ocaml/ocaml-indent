@@ -16,6 +16,13 @@
   "engines": {
     "atom": ">=1.0.0 <2.0.0"
   },
+  "providedServices": {
+    "ocamlIndent": {
+      "versions": {
+        "0.3.0": "provideIndent"
+      }
+    }
+  },
   "configSchema": {
     "ocp-indentPath": {
       "type": "string",

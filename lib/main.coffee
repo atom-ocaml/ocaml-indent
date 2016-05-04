@@ -45,8 +45,8 @@ module.exports =
     for range in editor.getSelectedBufferRanges()
       @indentRange editor, range
 
-  indentFile: ->
-    return unless editor = atom.workspace.getActiveTextEditor()
+  indentFile: (editor) ->
+    return unless editor ?= atom.workspace.getActiveTextEditor()
     @indentRange editor, editor.getBuffer().getRange()
 
   ocpIndent: (args, text) ->
@@ -64,6 +64,10 @@ module.exports =
       col = editor.lineTextForBufferRow(row)?.match(/^\s*/)[0].length ? 0
       indentString =  " ".repeat indent
       editor.setTextInBufferRange([[row, 0], [row, col]], indentString)
+
+  provideIndent: ->
+    indentFile: (editor) => @indentFile editor
+    indentRange: (editor, range) => @indentRange editor, range
 
   deactivate: ->
     @subscriptions.dispose()

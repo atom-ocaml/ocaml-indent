@@ -15,7 +15,7 @@ Each line is indented when a newline is inserted. Manual indenting can be done w
 
 ## Installation
 
-This package requires [language-ocaml] and [ocp-indent].
+This package requires [language-ocaml] and [ocp-indent]. For autocompletion, linting and other features,  [ocaml-merlin] is recommended.
 
 ```sh
 apm install language-ocaml
@@ -24,3 +24,4 @@ opam install ocp-indent
 
 [language-ocaml]: https://atom.io/packages/language-ocaml
 [ocp-indent]: https://www.typerex.org/ocp-indent.html
+[ocaml-merlin]: https://atom.io/packages/ocaml-merlin

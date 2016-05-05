@@ -59,7 +59,7 @@ module.exports =
       bp.process.stdin.end()
 
   doIndents: (editor, startRow, indents) ->
-    editor.transact ->
+    editor.transact 100, ->
       for indent, i in indents
         row = startRow + i
         col = editor.lineTextForBufferRow(row)?.match(/^\s*/)[0].length ? 0

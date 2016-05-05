@@ -23,7 +23,7 @@ module.exports =
           if text.endsWith '\n'
             @indentNewline editor, range
           prefix = editor.getTextInBufferRange [[range.end.row, 0], range.end]
-          if prefix.match /(else|then|do|and|end|done|\)|\}|\])$/
+          if prefix.match /(else|then|do|and|end|done|\)|\}|\]|=|<|>|@|\^|\||&|\+|-|\*|\/|\$|%|#|!=|or|:=|mod|land|lor|lxor|lsl|lsr|asr)$/
             @indentRange editor, range
         @subscriptions.add didInsertTextDisposable
 

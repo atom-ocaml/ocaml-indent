@@ -59,11 +59,12 @@ module.exports =
       bp.process.stdin.end()
 
   doIndents: (editor, startRow, indents) ->
-    for indent, i in indents
-      row = startRow + i
-      col = editor.lineTextForBufferRow(row)?.match(/^\s*/)[0].length ? 0
-      indentString =  " ".repeat indent
-      editor.setTextInBufferRange([[row, 0], [row, col]], indentString)
+    editor.transact ->
+      for indent, i in indents
+        row = startRow + i
+        col = editor.lineTextForBufferRow(row)?.match(/^\s*/)[0].length ? 0
+        indentString =  " ".repeat indent
+        editor.setTextInBufferRange([[row, 0], [row, col]], indentString)
 
   provideIndent: ->
     indentFile: (editor) => @indentFile editor

@@ -18,7 +18,7 @@ Each line is indented when a newline is inserted. Manual indenting can be done w
 This package requires [language-ocaml] and [ocp-indent]. For autocompletion, linting and other features,  [ocaml-merlin] is recommended.
 
 ```sh
-apm install language-ocaml
+apm install language-ocaml ocaml-merlin
 opam install ocp-indent
 ```
 

@@ -24,9 +24,20 @@
     }
   },
   "configSchema": {
-    "ocp-indentPath": {
+    "ocpIndentPath": {
+      "title": "Path to ocp-indent",
       "type": "string",
-      "default": "ocp-indent"
+      "default": "ocp-indent",
+      "order": 1
+    },
+    "ocpIndentArgs": {
+      "title": "Command line arguments for ocp-indent",
+      "type": "array",
+      "default": [],
+      "order": 2,
+      "items": {
+        "type": "string"
+      }
     }
   }
 }

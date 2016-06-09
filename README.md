@@ -13,9 +13,13 @@ Each line is indented when a newline is inserted. Manual indenting can be done w
 | `ocaml-indent:selection` | Indent lines containing selection or cursor | <kbd>ctrl-alt-i</kbd> | <kbd>cmd-alt-i</kbd> |
 | `ocaml-indent:file`      | Indent file                                 |                       |                      |
 
+## Configuration
+
+The recommended way to configure ocp-indent is with a `.ocp-indent` file in the project directory. See `ocp-indent --help` for more information. Command line arguments can be configured too if desired.
+
 ## Installation
 
-This package requires [language-ocaml] and [ocp-indent]. For autocompletion, linting and other features,  [ocaml-merlin] is recommended.
+This package requires [language-ocaml] and [ocp-indent]. For autocompletion, linting and other features, [ocaml-merlin] is recommended.
 
 ```sh
 apm install language-ocaml ocaml-merlin

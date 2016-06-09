@@ -51,7 +51,8 @@ module.exports =
 
   ocpIndent: (args, text) ->
     new Promise (resolve, reject) ->
-      command = atom.config.get 'ocaml-indent.ocp-indentPath'
+      command = atom.config.get 'ocaml-indent.ocpIndentPath'
+      args = args.concat atom.config.get 'ocaml-indent.ocpIndentArgs'
       stdout = (output) -> resolve output
       exit = (code) -> reject code if code
       bp = new BufferedProcess {command, args, stdout, exit}

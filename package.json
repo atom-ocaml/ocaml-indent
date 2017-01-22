@@ -9,7 +9,8 @@
     "ocp-indent"
   ],
   "activationHooks": [
-    "language-ocaml:grammar-used"
+    "language-ocaml:grammar-used",
+    "language-ocaml-fix:grammar-used"
   ],
   "repository": "https://github.com/314eter/atom-ocaml-indent",
   "license": "MIT",

@@ -1,4 +1,4 @@
-{CompositeDisposable, BufferedProcess} = require 'atom'
+{CompositeDisposable, BufferedProcess, File} = require 'atom'
 
 module.exports =
   subscriptions: null
@@ -29,7 +29,8 @@ module.exports =
 
   indentRange: (editor, {start, end}, text) ->
     text ?= editor.getText()
-    @ocpIndent ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"], text
+    cwd = new File(editor.getPath()).getParent().getPath()
+    @ocpIndent ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"], text, cwd
     .then (output) =>
       indents = (parseInt s for s in output.trim().split '\n')
       @doIndents editor, start.row, indents
@@ -49,13 +50,14 @@ module.exports =
     return unless editor ?= atom.workspace.getActiveTextEditor()
     @indentRange editor, editor.getBuffer().getRange()
 
-  ocpIndent: (args, text) ->
+  ocpIndent: (args, text, cwd) ->
     new Promise (resolve, reject) ->
       command = atom.config.get 'ocaml-indent.ocpIndentPath'
       args = args.concat atom.config.get 'ocaml-indent.ocpIndentArgs'
       stdout = (output) -> resolve output
       exit = (code) -> reject code if code
-      bp = new BufferedProcess {command, args, stdout, exit}
+      options = {cwd}
+      bp = new BufferedProcess {command, args, stdout, exit, options}
       bp.process.stdin.write text
       bp.process.stdin.end()
 

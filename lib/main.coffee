@@ -1,5 +1,5 @@
 {CompositeDisposable, BufferedProcess} = require 'atom'
-path = require('path')
+{dirname} = require('path')
 
 module.exports =
   subscriptions: null

@@ -1,4 +1,5 @@
-{CompositeDisposable, BufferedProcess, File} = require 'atom'
+{CompositeDisposable, BufferedProcess} = require 'atom'
+path = require('path')
 
 module.exports =
   subscriptions: null
@@ -28,9 +29,10 @@ module.exports =
         @subscriptions.add didInsertTextDisposable
 
   indentRange: (editor, {start, end}, text) ->
+    args = ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"]
     text ?= editor.getText()
-    cwd = new File(editor.getPath()).getParent().getPath()
-    @ocpIndent ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"], text, cwd
+    cwd = dirname editor.getPath()
+    @ocpIndent args, text, cwd
     .then (output) =>
       indents = (parseInt s for s in output.trim().split '\n')
       @doIndents editor, start.row, indents

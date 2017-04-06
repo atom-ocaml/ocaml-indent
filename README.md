@@ -8,10 +8,10 @@ _Use [ocp-indent] to indent your OCaml code in Atom._
 
 Each line is indented when a newline is inserted. Manual indenting can be done with the following commands.
 
-| Command                  | Description                                 | Keybinding (Linux)    | Keybinding (OS X)    |
-| ------------------------ | ------------------------------------------- | --------------------- | -------------------- |
-| `ocaml-indent:selection` | Indent lines containing selection or cursor | <kbd>ctrl-alt-i</kbd> | <kbd>cmd-alt-i</kbd> |
-| `ocaml-indent:file`      | Indent file                                 |                       |                      |
+| Command                  | Description                                 | Keybinding (Linux)    |
+| ------------------------ | ------------------------------------------- | --------------------- |
+| `ocaml-indent:selection` | Indent lines containing selection or cursor | <kbd>ctrl-alt-i</kbd> |
+| `ocaml-indent:file`      | Indent file                                 | <kbd>ctrl-alt-f</kbd> |
 
 ## Configuration
 

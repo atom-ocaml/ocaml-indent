@@ -31,7 +31,10 @@ module.exports =
   indentRange: (editor, {start, end}, text) ->
     args = ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"]
     text ?= editor.getText()
-    cwd = dirname editor.getPath()
+    cwd = if editor.getPath()?
+      dirname editor.getPath()
+    else
+      atom.project.getPaths()[0]
     @ocpIndent args, text, cwd
     .then (output) =>
       indents = (parseInt s for s in output.trim().split '\n')

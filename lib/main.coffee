@@ -7,7 +7,7 @@ module.exports =
   activate: (state) ->
     @subscriptions = new CompositeDisposable
 
-    target = 'atom-text-editor[data-grammar="source ocaml"]'
+    target = 'atom-text-editor[data-grammar~="ocaml"]'
     @subscriptions.add atom.commands.add target,
       'ocaml-indent:selection': => @indentSelection()
       'ocaml-indent:file': => @indentFile()
@@ -19,7 +19,7 @@ module.exports =
           @subscriptions.remove didInsertTextDisposable
           didInsertTextDisposable.dispose()
           didInsertTextDisposable = null
-        return unless grammar.scopeName == 'source.ocaml'
+        return unless ['source.ocaml', 'ocaml'].includes grammar.scopeName
         didInsertTextDisposable = editor.onDidInsertText ({text, range}) =>
           if text.endsWith '\n'
             @indentNewline editor, range

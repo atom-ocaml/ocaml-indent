@@ -40,8 +40,8 @@
         "type": "string"
       }
     },
-    "formatOnSave": {
-      "title": "Format On Save",
+    "indentOnSave": {
+      "title": "Indent On Save",
       "type": "boolean",
       "default": false,
       "order": 3

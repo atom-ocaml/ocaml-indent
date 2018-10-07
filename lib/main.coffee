@@ -33,7 +33,7 @@ module.exports =
         editorSubscriptions.add didInsertTextDisposable
       editorSubscriptions.add editor.getBuffer().onWillSave =>
         return unless ['source.ocaml', 'ocaml'].includes editor.getGrammar().scopeName
-        if atom.config.get 'ocaml-indent.formatOnSave'
+        if atom.config.get 'ocaml-indent.indentOnSave'
           @indentFile editor
 
   indentRange: (editor, {start, end}, text) ->

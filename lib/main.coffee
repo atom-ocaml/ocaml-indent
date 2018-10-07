@@ -13,10 +13,14 @@ module.exports =
       'ocaml-indent:file': => @indentFile()
 
     @subscriptions.add atom.workspace.observeTextEditors (editor) =>
-      didInsertTextDisposable = null
-      @subscriptions.add editor.observeGrammar (grammar) =>
+      editorSubscriptions = new CompositeDisposable
+      @subscriptions.add editorSubscriptions
+      editor.onDidDestroy =>
+        @subscriptions.remove editorSubscriptions
+        editorSubscriptions.dispose()
+      editorSubscriptions.add editor.observeGrammar (grammar) =>
         if didInsertTextDisposable?
-          @subscriptions.remove didInsertTextDisposable
+          editorSubscriptions.remove didInsertTextDisposable
           didInsertTextDisposable.dispose()
           didInsertTextDisposable = null
         return unless ['source.ocaml', 'ocaml'].includes grammar.scopeName
@@ -26,8 +30,8 @@ module.exports =
           prefix = editor.getTextInBufferRange [[range.end.row, 0], range.end]
           if prefix.match /(else|then|do|and|end|done|\)|\}|\]|\|)$/
             @indentRange editor, range
-        @subscriptions.add didInsertTextDisposable
-      @subscriptions.add editor.getBuffer().onWillSave =>
+        editorSubscriptions.add didInsertTextDisposable
+      editorSubscriptions.add editor.getBuffer().onWillSave =>
         return unless ['source.ocaml', 'ocaml'].includes editor.getGrammar().scopeName
         if atom.config.get 'ocaml-indent.formatOnSave'
           @indentFile editor

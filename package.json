@@ -39,6 +39,12 @@
       "items": {
         "type": "string"
       }
+    },
+    "formatOnSave": {
+      "title": "Format On Save",
+      "type": "boolean",
+      "default": false,
+      "order": 3
     }
   }
 }

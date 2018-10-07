@@ -27,6 +27,10 @@ module.exports =
           if prefix.match /(else|then|do|and|end|done|\)|\}|\]|\|)$/
             @indentRange editor, range
         @subscriptions.add didInsertTextDisposable
+      @subscriptions.add editor.getBuffer().onWillSave =>
+        return unless ['source.ocaml', 'ocaml'].includes editor.getGrammar().scopeName
+        if atom.config.get 'ocaml-indent.formatOnSave'
+          @indentFile()
 
   indentRange: (editor, {start, end}, text) ->
     args = ['--numeric', '--lines', "#{start.row + 1}-#{end.row + 1}"]

@@ -39,6 +39,12 @@
       "items": {
         "type": "string"
       }
+    },
+    "indentOnSave": {
+      "title": "Indent On Save",
+      "type": "boolean",
+      "default": false,
+      "order": 3
     }
   }
 }
